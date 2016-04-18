@@ -3,7 +3,7 @@
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/niceagency/NALocationManager) [![Carthage compatible](https://img.shields.io/badge/twitter-%40niceagency-blue.svg)](https://twitter.com/niceagency)
 
-NALocationManager is a simple wrapper class written around `CLLocationManager and CLLocationManagerDelegate to make requesting permissions and getting access to the user's current location quick and easy.
+NALocationManager is a simple wrapper class written around `CLLocationManager` and `CLLocationManagerDelegate` to make requesting permissions and getting access to the user's current location quick and easy.
 
 ## Features
 ===
