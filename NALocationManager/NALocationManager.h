@@ -3,7 +3,7 @@
 //  NALocationManager
 //
 //  Created by Tim Searle on 18/04/2016.
-//  Copyright © 2016 Tim Searle. All rights reserved.
+//  Copyright © 2016 Nice Agency. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
