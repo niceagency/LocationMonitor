@@ -18,7 +18,7 @@ public enum LocationManagerError: Int, ErrorType {
 
 /// `CLLocationManager` wrapper class that supports quick and easy access to the user's current location, with the ability to filter updates
 public class LocationManager: NSObject {
-    static let shared: LocationManager = LocationManager()
+    public static let shared: LocationManager = LocationManager()
     
     public typealias LocationUpdateCallback = (CLLocation?, NSError?, StopLocationUpdates) -> Void
     public typealias LocationUpdateFilter = ((CLLocation) -> Bool)
