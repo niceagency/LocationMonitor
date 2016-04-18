@@ -1,12 +1,12 @@
 # NALocationManager
-===
+___
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/niceagency/NALocationManager) [![Carthage compatible](https://img.shields.io/badge/twitter-%40niceagency-blue.svg)](https://twitter.com/niceagency)
 
 NALocationManager is a simple wrapper class written around `CLLocationManager` and `CLLocationManagerDelegate` to make requesting permissions and getting access to the user's current location quick and easy.
 
 ## Features
-===
+___
 
 * Trigger permission prompt when suits you best
 * Get user's current location in one call
@@ -15,7 +15,8 @@ NALocationManager is a simple wrapper class written around `CLLocationManager` a
 * Per location listener update filter
 
 ## Requirements
-===
+___
+
 Ensure you add one of the following keys with an associated string to your Info.plist file
 
 `NSLocationWhenInUseUsageDescription`
@@ -23,7 +24,7 @@ Ensure you add one of the following keys with an associated string to your Info.
 `NSLocationAlwaysUsageDescription`
 
 ## Usage
-===
+___
 
 ### Prompt use for permission (if needed)
 
@@ -74,7 +75,7 @@ LocationManager.shared.timeout = 60
 ```
 
 ## Installation
-===
+___
 
 ### Carthage
 
@@ -93,16 +94,16 @@ To integrate NALocationManager into your Xcode project using Carthage, specify i
 Run `carthage update` to build the framework and drag the built NALocationManager.framework into your Xcode project.
 
 ## Additional Information
-===
+___
 
 Please review the [CLLocationManager](https://developer.apple.com/library/ios/documentation/CoreLocation/Reference/CLLocationManager_Class/) documentation for more information.
 
 ## Contributions
-===
+___
 
 If you wish to contribute to NALocationManager please fork the repository and send a pull request or raise an issue within GitHub.
 
 ## License
-===
+___
 
 NALocationManager is released under the ****** license. See LICENSE for details.
