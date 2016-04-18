@@ -10,15 +10,15 @@ import Foundation
 import CoreLocation
 
 /// `ErrorType` cases specific to `LocationManager` usage
-public enum LocationManagerError: Int, ErrorType {
+public enum NALocationManagerError: Int, ErrorType {
     case LocationServicesUnavailable = 0
     case LocationServicesDisallowed
     case LocationServicesRequestTimedOut
 }
 
 /// `CLLocationManager` wrapper class that supports quick and easy access to the user's current location, with the ability to filter updates
-public class LocationManager: NSObject {
-    public static let shared: LocationManager = LocationManager()
+public class NALocationManager: NSObject {
+    public static let shared: NALocationManager = NALocationManager()
     
     public typealias LocationUpdateCallback = (CLLocation?, NSError?, StopLocationUpdates) -> Void
     public typealias LocationUpdateFilter = ((CLLocation) -> Bool)
@@ -113,13 +113,13 @@ public class LocationManager: NSObject {
     public func startUpdatingLocation(filter: LocationUpdateFilter? = nil, locationUpdate: LocationUpdateCallback) throws -> StopLocationUpdates {
         
         if !CLLocationManager.locationServicesEnabled() {
-            throw LocationManagerError.LocationServicesUnavailable
+            throw NALocationManagerError.LocationServicesUnavailable
         }
         
         let status = CLLocationManager.authorizationStatus()
         
         if status == .Denied || status == .Restricted {
-            throw LocationManagerError.LocationServicesDisallowed
+            throw NALocationManagerError.LocationServicesDisallowed
         }
         
         let someKey = NSUUID().UUIDString
@@ -158,9 +158,9 @@ public class LocationManager: NSObject {
         
         if let (_,callback,stopUpdates) = self.listeners[key] {
             
-            let error = NSError(domain: "LocationManagerError",
-                                code: LocationManagerError.LocationServicesRequestTimedOut.rawValue,
-                                userInfo: [NSLocalizedDescriptionKey : "\(LocationManagerError.LocationServicesRequestTimedOut)"])
+            let error = NSError(domain: "NALocationManagerError",
+                                code: NALocationManagerError.LocationServicesRequestTimedOut.rawValue,
+                                userInfo: [NSLocalizedDescriptionKey : "\(NALocationManagerError.LocationServicesRequestTimedOut)"])
             
             callback(nil, error, stopUpdates)
             stopUpdates()
@@ -177,7 +177,7 @@ public class LocationManager: NSObject {
     }
 }
 
-extension LocationManager: CLLocationManagerDelegate {
+extension NALocationManager: CLLocationManagerDelegate {
     
     public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard self.listeners.count > 0 else {
@@ -217,9 +217,9 @@ extension LocationManager: CLLocationManagerDelegate {
             
             for (_, (_, callback, stop)) in self.listeners {
                 
-                let error = NSError(domain: "LocationManagerError",
-                                    code: LocationManagerError.LocationServicesDisallowed.rawValue,
-                                    userInfo: [NSLocalizedDescriptionKey : "\(LocationManagerError.LocationServicesDisallowed)"])
+                let error = NSError(domain: "NALocationManagerError",
+                                    code: NALocationManagerError.LocationServicesDisallowed.rawValue,
+                                    userInfo: [NSLocalizedDescriptionKey : "\(NALocationManagerError.LocationServicesDisallowed)"])
                 
                 callback(nil, error, stop)
                 
