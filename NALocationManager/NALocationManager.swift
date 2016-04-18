@@ -26,7 +26,7 @@ public class NALocationManager: NSObject {
     
     private let locationManager: CLLocationManager = CLLocationManager()
     
-    private(set) var cachedLocation: CLLocation?
+    private(set) public var cachedLocation: CLLocation?
     private var listeners: [String : (LocationUpdateFilter?,LocationUpdateCallback,StopLocationUpdates)] = [:]
     private var timers: [String : NSTimer] = [:]
     
@@ -59,7 +59,7 @@ public class NALocationManager: NSObject {
     */
     public var timeout: NSTimeInterval = 60
     
-    override init() {
+    public override init() {
         super.init()
         self.locationManager.delegate = self
     }
