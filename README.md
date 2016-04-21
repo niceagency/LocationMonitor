@@ -40,13 +40,13 @@ Where *authorized* is a `Bool` and *status* is a value of `CLAuthorizationStatus
 
 ```
 do {
-        var stopUpdating = try LocationManager.shared.startUpdatingLocation { location, error, stopUdating in
-            print(location) // Do something with return location
-            stopUdating() // Stop receiving location updates on this listener
-        }  
-    } catch {
-        print(error)
-    }
+	var stopUpdating = try LocationManager.shared.startUpdatingLocation { location, error, stopUdating in
+	    print(location) // Do something with return location
+	    stopUdating() // Stop receiving location updates on this listener
+	}  
+} catch {
+    print(error)
+}
 ```
 
 The location update callback contains 3 parameters an optional `CLLocation` object, an optional error and a function that will stop updates on this listener.
@@ -54,16 +54,16 @@ The location update callback contains 3 parameters an optional `CLLocation` obje
 ### Filter location updates
 
 ```
-    do {   
-        try LocationManager.shared.startUpdatingLocation({ location -> Bool in
-            // Do some specific update filter block here
-            return true
-        }, locationUpdate: { location, error, stopUdating in
-                stopUdating()
-        })
-    } catch {
-        print(error)
-    }
+do {   
+    try LocationManager.shared.startUpdatingLocation({ location -> Bool in
+        // Do some specific update filter block here
+        return true
+    }, locationUpdate: { location, error, stopUdating in
+            stopUdating()
+    })
+} catch {
+    print(error)
+}
 ```
 
 ### Configurable properties
