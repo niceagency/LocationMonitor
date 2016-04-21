@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "875AAAB61CC508DA0063CA25"
-               BuildableName = "NALocationManager.framework"
-               BlueprintName = "NALocationManager"
-               ReferencedContainer = "container:NALocationManager.xcodeproj">
+               BuildableName = "LocationMonitor.framework"
+               BlueprintName = "LocationMonitor"
+               ReferencedContainer = "container:LocationMonitor.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "875AAAC01CC508DA0063CA25"
                BuildableName = "NALocationManagerTests.xctest"
                BlueprintName = "NALocationManagerTests"
-               ReferencedContainer = "container:NALocationManager.xcodeproj">
+               ReferencedContainer = "container:LocationMonitor.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "875AAAB61CC508DA0063CA25"
-            BuildableName = "NALocationManager.framework"
-            BlueprintName = "NALocationManager"
-            ReferencedContainer = "container:NALocationManager.xcodeproj">
+            BuildableName = "LocationMonitor.framework"
+            BlueprintName = "LocationMonitor"
+            ReferencedContainer = "container:LocationMonitor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "875AAAB61CC508DA0063CA25"
-            BuildableName = "NALocationManager.framework"
-            BlueprintName = "NALocationManager"
-            ReferencedContainer = "container:NALocationManager.xcodeproj">
+            BuildableName = "LocationMonitor.framework"
+            BlueprintName = "LocationMonitor"
+            ReferencedContainer = "container:LocationMonitor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -83,9 +83,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "875AAAB61CC508DA0063CA25"
-            BuildableName = "NALocationManager.framework"
-            BlueprintName = "NALocationManager"
-            ReferencedContainer = "container:NALocationManager.xcodeproj">
+            BuildableName = "LocationMonitor.framework"
+            BlueprintName = "LocationMonitor"
+            ReferencedContainer = "container:LocationMonitor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
