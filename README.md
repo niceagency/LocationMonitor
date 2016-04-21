@@ -1,9 +1,9 @@
-# NALocationManager
+# LocationMonitor
 ___
 
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/niceagency/NALocationManager) [![Carthage compatible](https://img.shields.io/badge/twitter-%40niceagency-blue.svg)](https://twitter.com/niceagency)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/niceagency/LocationMonitor) [![Carthage compatible](https://img.shields.io/badge/twitter-%40niceagency-blue.svg)](https://twitter.com/niceagency)
 
-NALocationManager is a simple wrapper class written around `CLLocationManager` and `CLLocationManagerDelegate` to make requesting permissions and getting access to the user's current location quick and easy.
+LocationMonitor is a simple wrapper class written around `CLLocationManager` and `CLLocationManagerDelegate` to make requesting permissions and getting access to the user's current location quick and easy.
 
 ## Features
 ___
@@ -87,11 +87,11 @@ You can install Carthage with [Homebrew](http://brew.sh/) using the following co
 
 `$ brew install carthage`
 
-To integrate NALocationManager into your Xcode project using Carthage, specify it in your Cartfile:
+To integrate LocationMonitor into your Xcode project using Carthage, specify it in your Cartfile:
 
-`github "niceagency/NALocationManager"`
+`github "niceagency/LocationMonitor"`
 
-Run `carthage update` to build the framework and drag the built NALocationManager.framework into your Xcode project.
+Run `carthage update` to build the framework and drag the built LocationMonitor.framework into your Xcode project.
 
 ## Additional Information
 ___
@@ -101,9 +101,9 @@ Please review the [CLLocationManager](https://developer.apple.com/library/ios/do
 ## Contributions
 ___
 
-If you wish to contribute to NALocationManager please fork the repository and send a pull request or raise an issue within GitHub.
+If you wish to contribute to LocationMonitor please fork the repository and send a pull request or raise an issue within GitHub.
 
 ## License
 ___
 
-NALocationManager is released under the ****** license. See LICENSE for details.
+LocationMonitor is released under the ****** license. See LICENSE for details.

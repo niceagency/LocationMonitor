@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		875AAABB1CC508DA0063CA25 /* LocationMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 875AAABA1CC508DA0063CA25 /* LocationMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		875AAAD21CC509140063CA25 /* LocationMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875AAAD11CC509140063CA25 /* LocationMonitor.swift */; };
+		875AAB2D1CC8DCC90063CA25 /* LocationMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 875AAB2A1CC8DCC90063CA25 /* LocationMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		875AAB2E1CC8DCC90063CA25 /* LocationMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875AAB2B1CC8DCC90063CA25 /* LocationMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		875AAAB71CC508DA0063CA25 /* LocationMonitor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LocationMonitor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		875AAABA1CC508DA0063CA25 /* LocationMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationMonitor.h; sourceTree = "<group>"; };
-		875AAABC1CC508DA0063CA25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		875AAAD11CC509140063CA25 /* LocationMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationMonitor.swift; sourceTree = "<group>"; };
+		875AAB291CC8DCC90063CA25 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = LocationMonitor/Info.plist; sourceTree = SOURCE_ROOT; };
+		875AAB2A1CC8DCC90063CA25 /* LocationMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationMonitor.h; path = LocationMonitor/LocationMonitor.h; sourceTree = SOURCE_ROOT; };
+		875AAB2B1CC8DCC90063CA25 /* LocationMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationMonitor.swift; path = LocationMonitor/LocationMonitor.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,7 +32,7 @@
 		875AAAAD1CC508DA0063CA25 = {
 			isa = PBXGroup;
 			children = (
-				875AAAB91CC508DA0063CA25 /* NALocationManager */,
+				875AAAB91CC508DA0063CA25 /* LocationMonitor */,
 				875AAAB81CC508DA0063CA25 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -45,13 +45,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		875AAAB91CC508DA0063CA25 /* NALocationManager */ = {
+		875AAAB91CC508DA0063CA25 /* LocationMonitor */ = {
 			isa = PBXGroup;
 			children = (
-				875AAABA1CC508DA0063CA25 /* LocationMonitor.h */,
-				875AAAD11CC509140063CA25 /* LocationMonitor.swift */,
-				875AAABC1CC508DA0063CA25 /* Info.plist */,
+				875AAB291CC8DCC90063CA25 /* Info.plist */,
+				875AAB2A1CC8DCC90063CA25 /* LocationMonitor.h */,
+				875AAB2B1CC8DCC90063CA25 /* LocationMonitor.swift */,
 			);
+			name = LocationMonitor;
 			path = NALocationManager;
 			sourceTree = "<group>";
 		};
@@ -62,7 +63,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				875AAABB1CC508DA0063CA25 /* LocationMonitor.h in Headers */,
+				875AAB2D1CC8DCC90063CA25 /* LocationMonitor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,7 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				875AAAD21CC509140063CA25 /* LocationMonitor.swift in Sources */,
+				875AAB2E1CC8DCC90063CA25 /* LocationMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,7 +241,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = NALocationManager/Info.plist;
+				INFOPLIST_FILE = LocationMonitor/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -259,7 +260,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = NALocationManager/Info.plist;
+				INFOPLIST_FILE = LocationMonitor/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
