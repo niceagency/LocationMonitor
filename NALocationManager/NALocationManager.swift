@@ -57,7 +57,7 @@ public final class NALocationManager: NSObject {
     
     /**
      The maximum time that can elapse between location updates
-    */
+     */
     public var timeout: NSTimeInterval = 60
     
     public override init() {
@@ -151,6 +151,7 @@ public final class NALocationManager: NSObject {
         guard let key = timer.userInfo as? String else {
             return
         }
+        
         
         print("We've timed out!")
         
