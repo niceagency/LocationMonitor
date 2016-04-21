@@ -106,4 +106,4 @@ If you wish to contribute to LocationMonitor please fork the repository and send
 ## License
 ___
 
-LocationMonitor is released under the ****** license. See LICENSE for details.
+LocationMonitor is released under the MIT license. See LICENSE for details.
