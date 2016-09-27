@@ -3,6 +3,8 @@ ___
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/niceagency/LocationMonitor) [![Carthage compatible](https://img.shields.io/badge/twitter-%40niceagency-blue.svg)](https://twitter.com/niceagency)
 
+#### Supports Swift 3
+
 LocationMonitor is a simple wrapper class written around `CLLocationManager` and `CLLocationManagerDelegate` to make requesting permissions and getting access to the user's current location quick and easy.
 
 ## Features
@@ -22,6 +24,12 @@ Ensure you add one of the following keys with an associated string to your Info.
 `NSLocationWhenInUseUsageDescription`
 
 `NSLocationAlwaysUsageDescription`
+
+##### System requirements
+
++ iOS 9.3+ 
++ Xcode 8.0+
++ Swift 3.0+
 
 ## Usage
 ___
@@ -97,6 +105,8 @@ Run `carthage update` to build the framework and drag the built LocationMonitor.
 ___
 
 Please review the [CLLocationManager](https://developer.apple.com/library/ios/documentation/CoreLocation/Reference/CLLocationManager_Class/) documentation for more information.
+
+This library is written in Swift 3.
 
 ## Contributions
 ___
