@@ -9,27 +9,26 @@
 import Foundation
 import CoreLocation
 
-/// `ErrorType` cases specific to `LocationManager` usage
-public enum LocationMonitorError: Int, ErrorType {
-    case LocationServicesUnavailable = 0
-    case LocationServicesDisallowed
-    case LocationServicesRequestTimedOut
+/// `Error` cases specific to `LocationManager` usage
+public enum LocationMonitorError: Int, Error {
+    case locationServicesUnavailable = 0
+    case locationServicesDisallowed
+    case locationServicesRequestTimedOut
 }
 
 /// `CLLocationManager` wrapper class that supports quick and easy access to the user's current location, with the ability to filter updates
-public final class LocationMonitor: NSObject {
+public class LocationMonitor: NSObject {
     
     public static let shared: LocationMonitor = LocationMonitor()
     
-    public typealias LocationUpdateCallback = (CLLocation?, NSError?, StopLocationUpdates) -> Void
+    public typealias StopLocationUpdates = () -> Void
+    public typealias LocationUpdateCallback = ((CLLocation?, Error?, StopLocationUpdates) -> Void)
     public typealias LocationUpdateFilter = ((CLLocation) -> Bool)
-    public typealias StopLocationUpdates = (() -> Void)
     
-    private let locationManager: CLLocationManager = CLLocationManager()
-    
-    private(set) public var cachedLocation: CLLocation?
-    private var listeners: [String : (LocationUpdateFilter?,LocationUpdateCallback,StopLocationUpdates)] = [:]
-    private var timers: [String : NSTimer] = [:]
+    fileprivate let locationManager: CLLocationManager = CLLocationManager()
+    fileprivate(set) public var cachedLocation: CLLocation?
+    fileprivate var listeners: [String : (LocationUpdateFilter?,LocationUpdateCallback,StopLocationUpdates)] = [:]
+    fileprivate var timers: [String : Timer] = [:]
     
     /**
      The desired `CLLocationAccuracy` for the location manager. See `desiredAccuracy` on `CLLocationManager` for more information.
@@ -58,7 +57,7 @@ public final class LocationMonitor: NSObject {
     /**
      The maximum time that can elapse between location updates
      */
-    public var timeout: NSTimeInterval = 60
+    public var timeout: TimeInterval = 60
     
     public override init() {
         super.init()
@@ -71,22 +70,22 @@ public final class LocationMonitor: NSObject {
     public func requestPermission() {
         print("Checking authorization status")
         self.locationManager.delegate = self
-        self.requestPermissionAndStartUpdating(false)
+        self.requestPermission(startUpdating: false)
     }
     
-    private func requestPermissionAndStartUpdating(startUpdating: Bool) {
+    fileprivate func requestPermission(startUpdating: Bool) {
         let status = CLLocationManager.authorizationStatus()
         
         switch status {
-        case .AuthorizedAlways, .AuthorizedWhenInUse:
+        case .authorizedAlways, .authorizedWhenInUse:
             print("CLLocationManager authorized")
             if startUpdating {
                 self.locationManager.startUpdatingLocation()
             }
-        case .NotDetermined:
+        case .notDetermined:
             print("Request location services permissions")
             self.locationManager.requestWhenInUseAuthorization()
-        case .Restricted, .Denied:
+        case .restricted, .denied:
             print("Location services are not allowed")
         }
     }
@@ -98,7 +97,7 @@ public final class LocationMonitor: NSObject {
     public func isAuthorized() -> (Bool, CLAuthorizationStatus) {
         let status = CLLocationManager.authorizationStatus()
         
-        if status == .AuthorizedWhenInUse || status == .AuthorizedAlways {
+        if status == .authorizedWhenInUse || status == .authorizedAlways {
             return (true, status)
         }
         
@@ -111,27 +110,27 @@ public final class LocationMonitor: NSObject {
      - Parameter locationUpdate: Callback of type `LocationUpdateCallback` that informs the caller when location updates have been returned
      - Throws: `LocationManagerError` errors based on the availability of location services
      */
-    public func startUpdatingLocation(filter: LocationUpdateFilter? = nil, locationUpdate: LocationUpdateCallback) throws -> StopLocationUpdates {
+    @nonobjc public func startUpdatingLocation(filter: LocationUpdateFilter? = nil, locationUpdate: @escaping LocationUpdateCallback) throws -> StopLocationUpdates {
         
         if !CLLocationManager.locationServicesEnabled() {
-            throw LocationMonitorError.LocationServicesUnavailable
+            throw LocationMonitorError.locationServicesUnavailable
         }
         
         let status = CLLocationManager.authorizationStatus()
         
-        if status == .Denied || status == .Restricted {
-            throw LocationMonitorError.LocationServicesDisallowed
+        if status == .denied || status == .restricted {
+            throw LocationMonitorError.locationServicesDisallowed
         }
         
-        let someKey = NSUUID().UUIDString
+        let someKey = UUID().uuidString
         
-        self.timers[someKey] = NSTimer.scheduledTimerWithTimeInterval(self.timeout, target: self, selector: #selector(locationUpdateDidTimeout(_:)), userInfo: someKey, repeats: false)
+        self.timers[someKey] = Timer.scheduledTimer(timeInterval: self.timeout, target: self, selector: #selector(LocationMonitor.locationUpdateDidTimeout), userInfo: someKey, repeats: false)
         
         let stopUpdates = {
-            self.listeners.removeValueForKey(someKey)
+            self.listeners.removeValue(forKey: someKey)
             
             self.timers[someKey]?.invalidate()
-            self.timers.removeValueForKey(someKey)
+            self.timers.removeValue(forKey: someKey)
             
             if self.listeners.count == 0 {
                 self.locationManager.stopUpdatingLocation()
@@ -142,27 +141,26 @@ public final class LocationMonitor: NSObject {
         
         self.listeners[someKey] = callbackEntry
         
-        self.requestPermissionAndStartUpdating(true)
+        self.requestPermission(startUpdating: true)
         
         return stopUpdates
     }
     
-    func locationUpdateDidTimeout(timer: NSTimer) {
+    func locationUpdateDidTimeout(timer: Timer) {
         guard let key = timer.userInfo as? String else {
             return
         }
         
-        
         print("We've timed out!")
         
         self.timers[key]?.invalidate()
-        self.timers.removeValueForKey(key)
+        self.timers.removeValue(forKey: key)
         
         if let (_,callback,stopUpdates) = self.listeners[key] {
             
             let error = NSError(domain: "LocationMonitorError",
-                                code: LocationMonitorError.LocationServicesRequestTimedOut.rawValue,
-                                userInfo: [NSLocalizedDescriptionKey : "\(LocationMonitorError.LocationServicesRequestTimedOut)"])
+                                code: LocationMonitorError.locationServicesRequestTimedOut.rawValue,
+                                userInfo: [NSLocalizedDescriptionKey : "\(LocationMonitorError.locationServicesRequestTimedOut)"])
             
             callback(nil, error, stopUpdates)
             stopUpdates()
@@ -181,7 +179,7 @@ public final class LocationMonitor: NSObject {
 
 extension LocationMonitor: CLLocationManagerDelegate {
     
-    public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard self.listeners.count > 0 else {
             self.locationManager.stopUpdatingLocation()
             return
@@ -192,7 +190,7 @@ extension LocationMonitor: CLLocationManagerDelegate {
             for (key, (filter, callback, stop)) in self.listeners {
                 
                 self.timers[key]?.invalidate()
-                self.timers[key] = NSTimer.scheduledTimerWithTimeInterval(self.timeout, target: self, selector: #selector(locationUpdateDidTimeout(_:)), userInfo: key, repeats: false)
+                self.timers[key] = Timer.scheduledTimer(timeInterval: self.timeout, target: self, selector: #selector(LocationMonitor.locationUpdateDidTimeout), userInfo: key, repeats: false)
                 
                 if let locationUpdateFilter = filter {
                     if locationUpdateFilter(latestUpdate) {
@@ -207,21 +205,21 @@ extension LocationMonitor: CLLocationManagerDelegate {
         }
     }
     
-    public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
-        if status == .AuthorizedWhenInUse || status == .AuthorizedAlways {
+        if status == .authorizedWhenInUse || status == .authorizedAlways {
             if self.listeners.count > 0 {
                 self.locationManager.startUpdatingLocation()
             }
         }
         
-        if status == .Denied || status == .Restricted {
+        if status == .denied || status == .restricted {
             
             for (_, (_, callback, stop)) in self.listeners {
                 
                 let error = NSError(domain: "LocationMonitorError",
-                                    code: LocationMonitorError.LocationServicesDisallowed.rawValue,
-                                    userInfo: [NSLocalizedDescriptionKey : "\(LocationMonitorError.LocationServicesDisallowed)"])
+                                    code: LocationMonitorError.locationServicesDisallowed.rawValue,
+                                    userInfo: [NSLocalizedDescriptionKey : "\(LocationMonitorError.locationServicesDisallowed)"])
                 
                 callback(nil, error, stop)
                 
@@ -230,12 +228,12 @@ extension LocationMonitor: CLLocationManagerDelegate {
         }
     }
     
-    public func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         
         for (key, (_, callback, stop)) in self.listeners {
             
             self.timers[key]?.invalidate()
-            self.timers.removeValueForKey(key)
+            self.timers.removeValue(forKey: key)
             
             callback(nil, error, stop)
         }
